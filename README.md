@@ -10,6 +10,9 @@ The purpose of this repository is to provide one way to implement important clas
 
 ## Datastructures
 
+- [ ] unique_pointer
+- [ ] shared_pointer
+- [ ] weak_pointer
 - [ ] array
 - [ ] vector
 - [ ] list

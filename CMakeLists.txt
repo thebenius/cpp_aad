@@ -14,9 +14,8 @@ endif()
 
 add_compile_options(-g -O0)
 
-add_library(array STATIC src/array.cpp)
 add_executable(arrayTest tests/array_test.cpp)
-target_link_libraries(arrayTest array gtest_main gmock_main)
+target_link_libraries(arrayTest gtest_main gmock_main)
 target_include_directories(arrayTest
     PUBLIC header
 )
