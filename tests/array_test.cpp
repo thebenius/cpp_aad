@@ -1,22 +1,27 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
+#include <iostream>
 #include <Array.hpp>
 
 using namespace testing;
 
 class ArrayTest: public testing::Test {
     public:
-        aad::Array<int, 5> arr;
+        aad::Array<int, 5> arr = {1,2,3,4,5};
 };
 
-TEST_F(ArrayTest, CopyConstructors) {
-    arr[2] = 5;
+TEST(ArrayConstructor, LiteralConstructor) {
+    aad::Array<int, 5> arr {1,2,3,4,5};
+    ASSERT_THAT(arr[2],Eq(3));
+}
+TEST(ArrayConstructor, CopyConstructors) {
+    aad::Array<int, 5> arr = {1,2,3,4,5};
     aad::Array<int, 5> arr2 = arr;
     ASSERT_THAT(arr2[2],Eq(arr[2]));
 }
 
-TEST_F(ArrayTest, AssignOperator) {
-    arr[2] = 5;
+TEST(ArrayConstructor, AssignOperator) {
+    aad::Array<int, 5> arr = {1,2,3,4,5};
     aad::Array<int, 5> arr2;
     arr2 = arr;
     ASSERT_THAT(arr2[2],Eq(arr[2]));
@@ -27,8 +32,7 @@ TEST_F(ArrayTest, GetSize) {
 }
 
 TEST_F(ArrayTest, SubscriptOperatorAdressesValues) {
-    arr[3] = 156;
-    ASSERT_THAT(arr[3], Eq(156));
+    ASSERT_THAT(arr[3], Eq(4));
 }
 
 TEST_F(ArrayTest, DataDeliversPointerToValues) {
@@ -37,8 +41,7 @@ TEST_F(ArrayTest, DataDeliversPointerToValues) {
 }
 
 TEST_F(ArrayTest, GetValueAt) {
-    arr[3] = 156;
-    ASSERT_THAT(arr.at(3), Eq(156));
+    ASSERT_THAT(arr.at(3), Eq(4));
 }
 
 TEST_F(ArrayTest, GetExceptionAtoutOfBounds) {
@@ -46,18 +49,9 @@ TEST_F(ArrayTest, GetExceptionAtoutOfBounds) {
 }
 
 TEST_F(ArrayTest, FrontIsFirstElement) {
-    arr[0] = 1;
-    arr[1] = 2;
-    arr[2] = 3;
-    arr[3] = 4;
-    arr[4] = 5;
     ASSERT_THAT(arr.front(), Eq(arr[0]));
 }
+
 TEST_F(ArrayTest, BackIsLastElement) {
-    arr[0] = 1;
-    arr[1] = 2;
-    arr[2] = 3;
-    arr[3] = 4;
-    arr[4] = 5;
     ASSERT_THAT(arr.back(), Eq(arr[4]));
 }

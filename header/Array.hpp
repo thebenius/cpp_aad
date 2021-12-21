@@ -1,10 +1,9 @@
 #pragma once
 
 #include <iostream>
+#include <conditional.hpp>
 
 namespace aad {
-
-
     
     template<typename T, size_t N>
     class Array {
@@ -37,11 +36,30 @@ namespace aad {
                 }
             }
 
+            inline void insert(const size_t pos, const T& arg) {
+                values[pos] = arg;
+            }
+
+            template <typename ...Args>
+            inline void insert(const size_t pos, const T& arg, const Args&... args) {
+                insert(pos, arg);
+                insert(pos+1, args...);
+            }
+
         public:
 
             Array() {
                 reserveSpaceForValues();
             }
+
+            template <typename ...Args,
+            typename = typename std::enable_if<are_all_convertible<T, Args...>::value>::type>
+            Array(const Args&... args) {
+                static_assert(sizeof...(args) <= N);
+                reserveSpaceForValues();
+                insert(0, args...);
+            }
+
 
             Array(const Array& other) {
                 reserveSpaceForValues();
