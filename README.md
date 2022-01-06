@@ -51,3 +51,15 @@ Feel free to browser the code and ask questions at any point.
 - [ ] heap
 - [ ] max_heap
 - [ ] min_heap
+- [ ] prime_generator
+- [ ] shunting_yard_algorithm
+- [ ] soundex
+- [ ] matrix_graph
+- [ ] list_graph
+- [ ] depth_first_search
+- [ ] breadth_first_search
+- [ ] dijkstra
+- [ ] floyd
+- [ ] st_dijkstra
+- [ ] st_prim
+- [ ] st_kruskal
