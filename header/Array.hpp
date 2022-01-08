@@ -64,13 +64,82 @@ namespace aad {
                 private:
                     Array<T, N> *obj;
 
+                protected:
+                    size_t pos;
+
                 public:
-                    iterator(Array<T, N> *obj) {
+                    iterator(Array<T, N> *obj, size_t pos) {
                         this->obj = obj;
+                        this->pos = pos;
                     }
 
-                    T operator*() const {
-                        return obj->at(0);
+                    T& operator*() const {
+                        return (*obj)[pos];
+                    }
+
+                    iterator operator++(int) {
+                        iterator old = *this;
+                        ++(this->pos);
+                        return old;
+                    }
+
+                    iterator operator++() {
+                        ++pos;
+                        return *this;
+                    }
+
+
+                    bool operator==(const aad::Array<T, N>::iterator &other) const {
+                        if (this->pos != other.pos) return false;
+                        if (obj != other.obj) return false;
+                        return true;
+                    }
+
+                    bool operator!=(const aad::Array<T, N>::iterator &other) const {
+                        return !(*this == other);
+                    }
+
+            };
+
+            /**
+             * @brief iterable version of array in reverse
+             */
+            class reverse_iterator {
+                private:
+                    Array<T, N> *obj;
+
+                protected:
+                    size_t pos;
+
+                public:
+                    reverse_iterator(Array<T, N> *obj, size_t pos) {
+                        this->obj = obj;
+                        this->pos = pos;
+                    }
+
+                    T& operator*() const {
+                        return (*obj)[pos];
+                    }
+
+                    reverse_iterator operator++(int) {
+                        reverse_iterator old = *this;
+                        --(this->pos);
+                        return old;
+                    }
+
+                    reverse_iterator operator++() {
+                        --pos;
+                        return *this;
+                    }
+                    
+                    bool operator==(const aad::Array<T, N>::reverse_iterator &other) const {
+                        if (this->pos != other.pos) return false;
+                        if (obj != other.obj) return false;
+                        return true;
+                    }
+
+                    bool operator!=(const aad::Array<T, N>::reverse_iterator &other) const {
+                        return !(*this == other);
                     }
 
             };
@@ -144,6 +213,14 @@ namespace aad {
                 return values[index];
             }
 
+            bool operator==(aad::Array<T, N> &other) {
+                return this == &other;
+            }
+
+            bool operator!=(aad::Array<T, N> &other) {
+                return !(*this == other);
+            }
+
             /**
              * @brief Access Element at specified position
              * 
@@ -214,8 +291,37 @@ namespace aad {
              * @return self::iterator
              */
             iterator begin() {
-                return iterator(this);
+                return iterator(this, 0);
+            }
+
+            /**
+             * @brief get iterator pointing to end of array
+             * 
+             * @return self::iterator
+             */
+            iterator end() {
+                return iterator(this, size());
+            }
+
+            /**
+             * @brief get reverse_iterator pointing to first element of reversed array
+             * 
+             * @return self::reverse_iterator
+             */
+            reverse_iterator rbegin() {
+                return reverse_iterator(this, size()-1);
+            }
+
+
+            /**
+             * @brief get reverse_iterator pointing to end of reversed array
+             * 
+             * @return self::iterator
+             */
+            reverse_iterator rend() {
+                return reverse_iterator(this, -1);
             }
     };
 
 }
+

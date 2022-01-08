@@ -14,7 +14,7 @@ The purpose of this repository is to provide one way to implement important clas
 
 ## Feedback
 
-Please feel free to give any feedback or opinion about the implementation.
+Please feel free to give any feedback or opinion about the implementation. Keep in mind that we intend to keep the behaviour as close as possible to the STL.
 
 Feel free to browser the code and ask questions at any point.
 
@@ -25,7 +25,7 @@ Feel free to browser the code and ask questions at any point.
 - [ ] unique_pointer
 - [ ] shared_pointer
 - [ ] weak_pointer
-- [ ] array
+- [x] array
 - [ ] vector
 - [ ] list
 - [ ] forward_list
@@ -63,3 +63,19 @@ Feel free to browser the code and ask questions at any point.
 - [ ] st_dijkstra
 - [ ] st_prim
 - [ ] st_kruskal
+
+
+## ToDo
+
+### Array
+ - cbegin
+ - cend
+ - crbegin
+ - crend
+ - fill
+ - swap
+ - get
+ - swap
+ - to_array
+ - tuple_size
+ - tuple_element
