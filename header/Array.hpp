@@ -58,6 +58,24 @@ namespace aad {
         public:
 
             /**
+             * @brief iterable version of array
+             */
+            class iterator {
+                private:
+                    Array<T, N> *obj;
+
+                public:
+                    iterator(Array<T, N> *obj) {
+                        this->obj = obj;
+                    }
+
+                    T operator*() const {
+                        return obj->at(0);
+                    }
+
+            };
+
+            /**
              * @brief Construct a new Array object
              * 
              * Instantiates array of variables of type T with length N.
@@ -188,6 +206,15 @@ namespace aad {
              */
             T& back() const {
                 return values[N-1];
+            }
+
+            /**
+             * @brief get iterator pointing to first element
+             * 
+             * @return self::iterator
+             */
+            iterator begin() {
+                return iterator(this);
             }
     };
 

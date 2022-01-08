@@ -10,6 +10,11 @@ class ArrayTest: public testing::Test {
         aad::Array<int, 5> arr = {1,2,3,4,5};
 };
 
+class ArrayIterator: public testing::Test {
+    public:
+        aad::Array<int, 5> arr = {1,2,3,4,5};
+};
+
 TEST(ArrayConstructor, LiteralConstructor) {
     aad::Array<int, 5> arr {1,2,3,4,5};
     ASSERT_THAT(arr[2],Eq(3));
@@ -54,4 +59,12 @@ TEST_F(ArrayTest, FrontIsFirstElement) {
 
 TEST_F(ArrayTest, BackIsLastElement) {
     ASSERT_THAT(arr.back(), Eq(arr[4]));
+}
+
+TEST_F(ArrayIterator, beginReturnsIterator) {
+    aad::Array<int, 5>::iterator it = arr.begin();
+}
+
+TEST_F(ArrayIterator, BeginContainsFirstElement) {
+    ASSERT_THAT(*arr.begin(), Eq(arr[0]));
 }
